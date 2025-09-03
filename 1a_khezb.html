@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hezeb el sg</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .disclaimer {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #ef4444;
+        }
+        .symbol-container {
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="disclaimer p-4 mb-8">
+        <div class="container mx-auto">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 pt-1">
+                    <i data-feather="alert-triangle" class="text-red-600"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-red-800">تنويه هام:</h3>
+                    <p class="mt-1 text-sm text-red-600">
+                       ولا يُسمح بالانضمام لأي شخص من خارجها SG، هذا الحزب مخصص فقط لطلاب  
+
+
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">لمحة عامة</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                فهم ايدولجية الحزب و نشاته
+            </p>
+			<!-- Image placed under the heading -->
+    <img src="23a2ce77-c4b3-4c6c-a217-88e173332866.png" 
+     alt="Historical Nazi flag (educational context about the Holocaust)" 
+     class="mx-auto mt-6 max-w-md rounded-lg shadow-lg">
+
+        
+        </div>
+    </header>
+
+    <nav class="sticky top-0 bg-white shadow-md z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex overflow-x-auto py-4 space-x-6">
+                <button onclick="openTab('introduction')" class="tab-button px-4 py-2 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">
+                    كيفية نشأت الحزب
+                </button>
+                <button onclick="openTab('context')" class="tab-button px-4 py-2 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">
+                   مبادئ النظام
+                </button>
+                
+                
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- Introduction Tab -->
+        <div id="introduction" class="tab-content active">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6">كيفية نشأت الحزب</h2>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <p class="mb-4">
+                       جاء جان هتلر مع حزبه، حيث سيطر على فرع الحزب الاشتراكي. طلب ​​الحزب من ألبرت أينشتاين المساعدة في تطوير نظريات جديدة تتناول العلاقة بين الفيزياء والسود والاشتراكية الوطنية. لذا اقترح ثلاثة خيارات: التأمين، وفرض رسوم جمركية على السود، وصواريخ فايبس. أعجب جان هتلر بالفكرة، وبلغت الاشتراكية الوطنية ذروتها. علاوة على ذلك، أعلن أينشتاين أن كل هذا سيقوده هو والأدب والفلسفة والعقل إلى الجحيم. يا لك من فتى شقي، تباً لك.
+
+                    </p>
+                    <p class="mb-4">
+                       
+                    </p>
+                    <p>
+                       
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-3">Key Figures</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span>Jean Hitler (1889-1945) - Führer of Nazi Sg</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span>unknown</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span>unknown</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-3">Timeline</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span>2023: Nazi Party founded</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span>2024: jean Hitler has officially announced hezeb el sg </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i>
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Context Tab -->
+        <div id="context" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6">مبادئ النظام:</h2>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">مبادئ النظام:</h3>
+                    <p class="mb-4">
+                        مستوحاة من فلسفة كارل ماركس وعلم النفس التجريبي.
+
+يقتصر على التعمق في أعماق البشرية، أي التعمق فيها، كما اعتمده اللواء 731 (ابحث عنه في جوجل، وستجد الإجابة). زائد واحد زائد واحد يساوي صفرًا مقسومًا على واحد.
+
+أصبحت أغنية "ميتشو" النشيد الوطني للحزب الاشتراكي.
+
+                    </p>
+                    <p class="mb-4">
+                       
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">محكمة حزب الحزب الاشتراكي</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium mb-2">محكمة الحزب الدولية رقم 20
+</h4>
+                            <p class="text-sm text-gray-600">
+                               سيُعاقب كل من يعارض هذا. تُعرَّض سياسات الحزب الذي يسيطر على حزبي SV وSE، وكل من يُهدِّد أمن الدولة (الحزب)، لأشد العقوبات، مثل قانون قيصر. وقد أدى إنشاء وحدة استخبارات BBIA كقوة حفظ سلام لأمن الحزب إلى تفاقم الوضع.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div cl
+                </div>
+            </div>
+        </div>
+
+
+
+  
+    </footer>
+
+    <script>
+        // Tab functionality
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('border-gray-900', 'text-gray-900');
+                tabButtons[i].classList.add('border-transparent');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('border-gray-900', 'text-gray-900');
+            event.currentTarget.classList.remove('border-transparent');
+        }
+        
+        // Initialize AOS and feather icons
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            feather.replace();
+        });
+    </script>
+</body>
+</html>
