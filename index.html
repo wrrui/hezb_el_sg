@@ -146,6 +146,36 @@
             <div class="mt-6 text-center">
                 <img src="jean-hitler.png" alt="الرئيس جان هتلر" class="mx-auto w-full max-w-xs">
                 <p class="mt-2 text-gray-700 font-medium">الرئيس جان هتلر</p>
+
+
+<!-- Nashid Section -->
+<div class="mt-8 bg-white rounded-lg shadow-md p-6 text-center">
+  <h3 class="text-xl font-bold mb-4">🎵 النشيد الرسمي لحزب SG</h3>
+
+  <!-- Lyrics -->
+  <p class="mb-6 text-gray-700 leading-relaxed whitespace-pre-line">
+واقفون متأهبون للمعركة جاهزون للفوز متحمسون بقيادة الاسود  
+اولهم قائدنا قائدنا قائدنا جان جان هتلر  
+قائدنا قائدنا قائدنا جان جان هتلر  
+اتى من عند الالمان علمنا الاصول قادنا في الحروب و غزى المنافقون  
+نعم نعم نعم نعم نعم نعم جان جان هتلر  
+قائدنا قائدنا قائدنا جان جان هتلر  
+غزى الباد بويز غزى الالمان غزى الsg و طقيه للsv  
+جيش في ظهىه جاهز للنزاع حاملا السلاح هاتفا بثلاث عبارات  
+"قائدنا قائدنا قائدنا جان جان هتلر"
+  </p>
+
+  <!-- Stylish Play Button -->
+  <button id="play-btn" onclick="toggleNashid()" 
+          class="w-20 h-20 bg-gradient-to-r from-pink-500 to-red-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transform transition duration-300 text-2xl font-bold">
+      ▶️
+  </button>
+
+  <!-- Audio File -->
+  <audio id="nashid-audio" src="nashid.mp3"></audio>
+</div>
+
+
             </div>
         </div>
     </div>
@@ -325,6 +355,19 @@ document.addEventListener('DOMContentLoaded',function(){
 // Enter key submit
 document.getElementById("password-input").addEventListener("keydown", function(e){ if(e.key==="Enter") checkPassword(); });
 document.getElementById("member-pass").addEventListener("keydown", function(e){ if(e.key==="Enter") checkMemberLogin(); });
+function toggleNashid() {
+  const audio = document.getElementById("nashid-audio");
+  const btn = document.getElementById("play-btn");
+
+  if (audio.paused) {
+    audio.play();
+    btn.textContent = "⏸️"; // Change to pause icon
+  } else {
+    audio.pause();
+    btn.textContent = "▶️"; // Change back to play icon
+  }
+}
+
 </script>
 </body>
 </html>
