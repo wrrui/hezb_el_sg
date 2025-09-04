@@ -1,69 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hezeb el sg</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <style>
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .disclaimer {
-            background-color: rgba(255, 0, 0, 0.1);
-            border-left: 4px solid #ef4444;
-        }
-        .symbol-container {
-            filter: grayscale(100%);
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
-        .animate-shake {
-            animation: shake 0.5s;
-        }
-        .success-message {
-            color: #22c55e; /* Tailwind green-500 */
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hezeb el sg</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="members.js"></script>
+<style>
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .disclaimer { background-color: rgba(255, 0, 0, 0.1); border-left: 4px solid #ef4444; }
+    .symbol-container { filter: grayscale(100%); }
+    @keyframes shake { 0%,100%{transform:translateX(0);} 20%,60%{transform:translateX(-10px);} 40%,80%{transform:translateX(10px);} }
+    .animate-shake { animation: shake 0.5s; }
+    .success-message { color: #22c55e; font-weight: bold; margin-top: 1rem; }
+    .leader { background-color: gold; font-weight: bold; padding: 4px 8px; border-radius: 8px; display: inline-block; }
+    .majless { background-color: #f0f9ff; font-weight: bold; padding: 4px 8px; border-radius: 8px; display: inline-block; margin:2px 0; }
+    .member { padding: 2px 6px; margin:2px 0; display: inline-block; }
+    .overlay { position: fixed; inset:0; background-color: rgba(0,0,0,0.95); z-index:50; display:flex; justify-content:center; align-items:center; }
+</style>
 </head>
-
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-<!-- Password Overlay -->
-<div id="password-overlay" class="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50 hidden">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold text-red-600 mb-6 animate-pulse">🔒 دخول محمي</h1>
-    <p class="text-lg text-gray-300 mb-4">أدخل كلمة المرور للوصول إلى المحتوى السري</p>
-    
-    <input type="password" id="password-input"
-           class="w-64 px-4 py-2 border-2 border-red-600 bg-black text-red-500 text-center text-xl rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-           placeholder="********">
-    
-    <button onclick="checkPassword()"
-            class="mt-4 w-64 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">
-      دخول
-    </button>
-    
-    <p id="error-message" class="mt-4 text-red-500 font-bold hidden">❌ كلمة المرور خاطئة!</p>
-    <p id="success-message" class="success-message hidden">✅ تم الدخول بنجاح!</p>
-  </div>
+<!-- Secret Password Overlay -->
+<div id="password-overlay" class="overlay hidden flex-col text-center">
+  <h1 class="text-4xl font-bold text-red-600 mb-6 animate-pulse">🔒 دخول محمي</h1>
+  <p class="text-lg text-gray-300 mb-4">أدخل كلمة المرور للوصول إلى المحتوى السري</p>
+  <input type="password" id="password-input" class="w-64 px-4 py-2 border-2 border-red-600 bg-black text-red-500 text-center text-xl rounded-md focus:outline-none focus:ring-2 focus:ring-red-700" placeholder="********">
+  <button onclick="checkPassword()" class="mt-4 w-64 bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">دخول</button>
+  <p id="error-message" class="mt-4 text-red-500 font-bold hidden">❌ كلمة المرور خاطئة!</p>
+  <p id="success-message" class="success-message hidden">✅ تم الدخول بنجاح!</p>
+</div>
+
+<!-- Member Login Overlay -->
+<div id="login-overlay" class="overlay hidden flex-col text-center">
+  <h1 class="text-4xl font-bold text-blue-600 mb-6 animate-pulse">👤 تسجيل الدخول للأعضاء</h1>
+  <input type="text" id="member-id" placeholder="ادخل الـ ID" class="w-64 px-4 py-2 border-2 border-blue-600 bg-black text-blue-500 text-center text-xl rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-700">
+  <input type="password" id="member-pass" placeholder="ادخل كلمة المرور" class="w-64 px-4 py-2 border-2 border-blue-600 bg-black text-blue-500 text-center text-xl rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-700">
+  <button onclick="checkMemberLogin()" class="mt-2 w-64 bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300">تسجيل الدخول</button>
+  <p id="login-error" class="mt-4 text-red-500 font-bold hidden">❌ ID أو كلمة المرور خاطئة!</p>
 </div>
 
 <!-- Disclaimer -->
@@ -89,238 +69,262 @@
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
             فهم ايدولجية الحزب و نشاته
         </p>
-        <img src="23a2ce77-c4b3-4c6c-a217-88e173332866.png" 
-             alt="Historical Nazi flag (educational context about the Holocaust)" 
-             class="mx-auto mt-6 w-full max-w-md rounded-lg shadow-lg">
+        <img src="23a2ce77-c4b3-4c6c-a217-88e173332866.png" alt="Historical Nazi flag (educational context about the Holocaust)" class="mx-auto mt-6 w-full max-w-md rounded-lg shadow-lg">
     </div>
 </header>
 
 <nav class="sticky top-0 bg-white shadow-md z-10">
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row md:space-x-6">
-            <button onclick="openTab('introduction')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">
-                كيفية نشأت الحزب
-            </button>
-            <button onclick="openTab('context')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">
-                مبادئ النظام
-            </button>
-            <button onclick="openTab('laws')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">
-                قوانين الحزب
-            </button>
-            <button onclick="openProtectedTab('secret')" 
-                class="tab-button w-full md:w-auto px-4 py-3 font-medium text-gray-700 hover:text-gray-900 border-b-2 border-transparent transition">
-                سري
-            </button>
+            <button onclick="openTab('introduction')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">كيفية نشأت الحزب</button>
+            <button onclick="openTab('context')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">مبادئ النظام</button>
+            <button onclick="openTab('laws')" class="tab-button w-full md:w-auto text-left md:text-center px-4 py-3 font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap border-b-2 border-transparent hover:border-gray-300 transition">قوانين الحزب</button>
+            <button onclick="openProtectedTab('secret')" class="tab-button w-full md:w-auto px-4 py-3 font-medium text-gray-700 hover:text-gray-900 border-b-2 border-transparent transition">سري</button>
+            <button onclick="openTab('members')" class="tab-button w-full md:w-auto px-4 py-3 font-medium text-gray-700 hover:text-gray-900 border-b-2 border-transparent transition">خاص بالأعضاء</button>
         </div>
     </div>
 </nav>
 
 <main class="container mx-auto px-4 py-8 md:py-12">
 
-    <!-- Introduction Tab -->
-    <div id="introduction" class="tab-content active">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6">كيفية نشأت الحزب</h2>
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <p class="mb-4">
-                    جاء جان هتلر مع حزبه، حيث سيطر على فرع الحزب الاشتراكي. طلب ​​الحزب من ألبرت أينشتاين المساعدة في تطوير نظريات جديدة تتناول العلاقة بين الفيزياء والسود والاشتراكية الوطنية. لذا اقترح ثلاثة خيارات: التأمين، وفرض رسوم جمركية على السود، وصواريخ فايبس. أعجب جان هتلر بالفكرة، وبلغت الاشتراكية الوطنية ذروتها. علاوة على ذلك، أعلن أينشتاين أن كل هذا سيقوده هو والأدب والفلسفة والعقل إلى الجحيم. يا لك من فتى شقي، تباً لك.
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">أعضاء مجلس إدارة الحزب</h3>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>جان هتلر الأمين العام للحزب</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>المستشار القانوني : منذر</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>مستشار الرئيس : هشام</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="user" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>وزير الأشغال :آدم</span>
-                            </li>
-                        </ul>
-                    </div>
+<!-- Introduction Tab -->
+<div id="introduction" class="tab-content active">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">كيفية نشأت الحزب</h2>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <p class="mb-4">
+                جاء جان هتلر مع حزبه، حيث سيطر على فرع الحزب الاشتراكي. طلب ​​الحزب من ألبرت أينشتاين المساعدة في تطوير نظريات جديدة تتناول العلاقة بين الفيزياء والسود والاشتراكية الوطنية. لذا اقترح ثلاثة خيارات: التأمين، وفرض رسوم جمركية على السود، وصواريخ فايبس. أعجب جان هتلر بالفكرة، وبلغت الاشتراكية الوطنية ذروتها. علاوة على ذلك، أعلن أينشتاين أن كل هذا سيقوده هو والأدب والفلسفة والعقل إلى الجحيم. يا لك من فتى شقي، تباً لك.
+            </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-3">أعضاء مجلس إدارة الحزب</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><i data-feather="user" class="text-gray-500 mr-2 mt-1"></i><span>جان هتلر الأمين العام للحزب</span></li>
+                        <li class="flex items-start"><i data-feather="user" class="text-gray-500 mr-2 mt-1"></i><span>المستشار القانوني : منذر</span></li>
+                        <li class="flex items-start"><i data-feather="user" class="text-gray-500 mr-2 mt-1"></i><span>مستشار الرئيس : هشام</span></li>
+                        <li class="flex items-start"><i data-feather="user" class="text-gray-500 mr-2 mt-1"></i><span>وزير الأشغال :آدم</span></li>
+                    </ul>
                 </div>
-                
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">Timeline</h3>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>2023: Nazi Party founded</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i>
-                                <span>2024: jean Hitler has officially announced hezeb el sg</span>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-3">Timeline</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i><span>2023: Nazi Party founded</span></li>
+                        <li class="flex items-start"><i data-feather="clock" class="text-gray-500 mr-2 mt-1"></i><span>2024: jean Hitler has officially announced hezeb el sg</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Context Tab -->
-    <div id="context" class="tab-content">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6">مبادئ النظام:</h2>
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h3 class="text-xl font-semibold mb-4">مبادئ النظام:</h3>
-                <p class="mb-4">
-                    مستوحاة من فلسفة كارل ماركس وعلم النفس التجريبي.
-                    يقتصر على التعمق في أعماق البشرية، أي التعمق فيها، كما اعتمده اللواء 731 (ابحث عنه في جوجل، وستجد الإجابة). زائد واحد زائد واحد يساوي صفرًا مقسومًا على واحد.
-                    أصبحت أغنية "ميتشو" النشيد الوطني للحزب الاشتراكي.
-                </p>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h3 class="text-xl font-semibold mb-4">محكمة حزب الحزب الاشتراكي</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-medium mb-2">محكمة الحزب الدولية رقم 20</h4>
-                        <p class="text-sm text-gray-600">
-                            سيُعاقب كل من يعارض هذا. تُعرَّض سياسات الحزب الذي يسيطر على حزبي SV وSE، وكل من يُهدِّد أمن الدولة (الحزب)، لأشد العقوبات، مثل قانون قيصر. وقد أدى إنشاء وحدة استخبارات BBIA كقوة حفظ سلام لأمن الحزب إلى تفاقم الوضع.
-                        </p>
-                    </div>
-                </div>
-                <div class="mt-6 text-center">
-                    <img src="jean-hitler.png" alt="الرئيس جان هتلر" class="mx-auto w-full max-w-xs">
-                    <p class="mt-2 text-gray-700 font-medium">الرئيس جان هتلر</p>
+<!-- Context Tab -->
+<div id="context" class="tab-content">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">مبادئ النظام:</h2>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">مبادئ النظام:</h3>
+            <p class="mb-4">
+                مستوحاة من فلسفة كارل ماركس وعلم النفس التجريبي.
+                يقتصر على التعمق في أعماق البشرية، أي التعمق فيها، كما اعتمده اللواء 731 (ابحث عنه في جوجل، وستجد الإجابة). زائد واحد زائد واحد يساوي صفرًا مقسومًا على واحد.
+                أصبحت أغنية "ميتشو" النشيد الوطني للحزب الاشتراكي.
+            </p>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">محكمة حزب الحزب الاشتراكي</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-medium mb-2">محكمة الحزب الدولية رقم 20</h4>
+                    <p class="text-sm text-gray-600">
+                        سيُعاقب كل من يعارض هذا. تُعرَّض سياسات الحزب الذي يسيطر على حزبي SV وSE، وكل من يُهدِّد أمن الدولة (الحزب)، لأشد العقوبات، مثل قانون قيصر. وقد أدى إنشاء وحدة استخبارات BBIA كقوة حفظ سلام لأمن الحزب إلى تفاقم الوضع.
+                    </p>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Laws Tab -->
-    <div id="laws" class="tab-content">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6"> قوانين الحزب:</h2>
-            <div class="bg-red-100 border border-red-300 text-red-900 rounded-lg shadow-md p-6 mb-8">
-                <p class="mb-4">
-                    باسم الله الرحمان الرحيم، بصفتي مستشار الزعيم جان هتلر القانوني، اقدم لكم قوانين هذا الحزب العريق:
-                </p>
-                <ol class="list-decimal list-inside space-y-2">
-                    <li><span class="font-bold">عدم تسريب معلومات الحزب الداخلية</span> لأي شخص.</li>
-                    <li><span class="font-bold">الوفاء للزعيم و للحزب</span></li>
-                    <li><span class="font-bold">احترام اعضاء هذا الحزب</span> و التعاون في حالة المشاكل مع الأحزاب المجاورة.</li>
-                    <li><span class="font-bold">عدم تشجيع نشاطات لا تخص هذا الحزب</span> أو تنقض نظامه.</li>
-                    <li><span class="font-bold">حمل البطاقة الحزبية</span> داخل أو خارج المدرسة.</li>
-                    <li><span class="font-bold">حق كل عضو في إعطاء فكرة</span> تساعد في تقوية و تحسين الحزب من جميع النواحي (عسكريا، سياسيا، اقتصاديا و اجتماعيا).</li>
-                    <li><span class="font-bold">الإنتماء إلى محكمة فيقو العسكرية</span> و الاستعداد لأي حرب ضد العدو.</li>
-                    <li><span class="font-bold">عدم تشكيل الفتن</span> بين الأعضاء.</li>
-                    <li><span class="font-bold">منع تقليد أي تاتو لمسؤولي الحزب</span> و إلا ستتعرض للمحاكمة من قبل محكمة فيقو الدولية.</li>
-                    <li><span class="font-bold">منع محاولة الانقلاب</span> على الرئيس أو النظام لأن الرد سيكون صارما.</li>
-                    <li><span class="font-bold">منع "التفسيد"</span> على أي عمل غير مشروع يتم تنفيذه خلال الحصص.</li>
-                    <li><span class="font-bold">محاولة عدم الاعتراف بالرئيس</span> سوف تعرضك للحجز.</li>
-                    <li><span class="font-bold">معارضة قرارات الرئيس</span> قد تؤدي إلى الطرد.</li>
-                </ol>
-                <p class="mt-6 font-bold">
-                    ______________________________<br>
-                    وبالطبع، بحال أي مخالفة للقوانين سيواجه المتهم عقوبة يقررها المستشار القانوني مع إمضاء خطي من جان هتلر بحضور مجلس الإدارة.
-                </p>
+            <div class="mt-6 text-center">
+                <img src="jean-hitler.png" alt="الرئيس جان هتلر" class="mx-auto w-full max-w-xs">
+                <p class="mt-2 text-gray-700 font-medium">الرئيس جان هتلر</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Secret Tab -->
-    <div id="secret" class="tab-content">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6">🔒 المحتوى السري</h2>
-            <div class="bg-gray-100 rounded-lg shadow-md p-6 mb-8">
-                <p>هذا القسم محمي بكلمة مرور ولا يظهر إلا عند إدخال الكلمة الصحيحة.</p>
-            </div>
+<!-- Laws Tab -->
+<div id="laws" class="tab-content">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6"> قوانين الحزب:</h2>
+        <div class="bg-red-100 border border-red-300 text-red-900 rounded-lg shadow-md p-6 mb-8">
+            <p class="mb-4">
+                باسم الله الرحمان الرحيم، بصفتي مستشار الزعيم جان هتلر القانوني، اقدم لكم قوانين هذا الحزب العريق:
+            </p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><span class="font-bold">عدم تسريب معلومات الحزب الداخلية</span> لأي شخص.</li>
+                <li><span class="font-bold">الوفاء للزعيم و للحزب</span></li>
+                <li><span class="font-bold">احترام اعضاء هذا الحزب</span> و التعاون في حالة المشاكل مع الأحزاب المجاورة.</li>
+                <li><span class="font-bold">عدم تشجيع نشاطات لا تخص هذا الحزب</span> أو تنقض نظامه.</li>
+                <li><span class="font-bold">حمل البطاقة الحزبية</span> داخل أو خارج المدرسة.</li>
+                <li><span class="font-bold">حق كل عضو في إعطاء فكرة</span> تساعد في تقوية و تحسين الحزب من جميع النواحي (عسكريا، سياسيا، اقتصاديا و اجتماعيا).</li>
+                <li><span class="font-bold">الإنتماء إلى محكمة فيقو العسكرية</span> و الاستعداد لأي حرب ضد العدو.</li>
+                <li><span class="font-bold">عدم تشكيل الفتن</span> بين الأعضاء.</li>
+                <li><span class="font-bold">منع تقليد أي تاتو لمسؤولي الحزب</span> و إلا ستتعرض للمحاكمة من قبل محكمة فيقو الدولية.</li>
+                <li><span class="font-bold">منع محاولة الانقلاب</span> على الرئيس أو النظام لأن الرد سيكون صارما.</li>
+                <li><span class="font-bold">منع "التفسيد"</span> على أي عمل غير مشروع يتم تنفيذه خلال الحصص.</li>
+                <li><span class="font-bold">محاولة عدم الاعتراف بالرئيس</span> سوف تعرضك للحجز.</li>
+                <li><span class="font-bold">معارضة قرارات الرئيس</span> قد تؤدي إلى الطرد.</li>
+            </ol>
+            <p class="mt-6 font-bold">
+                ______________________________<br>
+                وبالطبع، بحال أي مخالفة للقوانين سيواجه المتهم عقوبة يقررها المستشار القانوني مع إمضاء خطي من جان هتلر بحضور مجلس الإدارة.
+            </p>
         </div>
     </div>
+</div>
+
+<!-- Secret Tab -->
+<div id="secret" class="tab-content">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">🔒 المحتوى السري</h2>
+        <div class="bg-gray-100 rounded-lg shadow-md p-6 mb-8">
+            <p>هذا القسم محمي بكلمة مرور ولا يظهر إلا عند إدخال الكلمة الصحيحة.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Members Tab -->
+<div id="members" class="tab-content">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">خاص بالأعضاء</h2>
+        <div id="member-list" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <p>يجب تسجيل الدخول لعرض قائمة الأعضاء.</p>
+        </div>
+    </div>
+</div>
 
 </main>
 
 <script>
-    // Tab functionality
-    function openTab(tabName) {
-        const tabContents = document.getElementsByClassName('tab-content');
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove('active');
-        }
-        
-        const tabButtons = document.getElementsByClassName('tab-button');
-        for (let i = 0; i < tabButtons.length; i++) {
-            tabButtons[i].classList.remove('border-gray-900', 'text-gray-900');
-            tabButtons[i].classList.add('border-transparent');
-        }
-        
-        document.getElementById(tabName).classList.add('active');
-        event.currentTarget.classList.add('border-gray-900', 'text-gray-900');
-        event.currentTarget.classList.remove('border-transparent');
+let failedSecretAttempts = 0;
+let failedLoginAttempts = 0;
+
+// Tab functionality
+function openTab(tabName) {
+    const tabContents = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabContents.length; i++) tabContents[i].classList.remove('active');
+    const tabButtons = document.getElementsByClassName('tab-button');
+    for (let i = 0; i < tabButtons.length; i++) { tabButtons[i].classList.remove('border-gray-900','text-gray-900'); tabButtons[i].classList.add('border-transparent'); }
+    document.getElementById(tabName).classList.add('active');
+    event.currentTarget?.classList.add('border-gray-900','text-gray-900');
+    event.currentTarget?.classList.remove('border-transparent');
+
+    // If member tab, show login overlay
+    if(tabName==='members') document.getElementById('login-overlay').classList.remove('hidden');
+}
+
+// Secret tab
+const SECRET_PASSWORD = "1234";
+function openProtectedTab(tabName){
+    document.getElementById("password-overlay").classList.remove("hidden");
+    document.getElementById("password-overlay").dataset.tab = tabName;
+    document.getElementById("password-input").focus();
+}
+function checkPassword(){
+    const input = document.getElementById("password-input").value;
+    const overlay = document.getElementById("password-overlay");
+    const error = document.getElementById("error-message");
+    const success = document.getElementById("success-message");
+    const box = document.getElementById("password-input");
+
+    if(input===SECRET_PASSWORD){
+        box.classList.remove("border-red-600","text-red-500");
+        box.classList.add("border-green-600","text-green-500");
+        error.classList.add("hidden"); success.classList.remove("hidden");
+
+        setTimeout(()=>{
+            overlay.classList.add("hidden");
+            openTab(overlay.dataset.tab);
+            box.value=""; success.classList.add("hidden");
+            box.classList.remove("border-green-600","text-green-500");
+            box.classList.add("border-red-600","text-red-500");
+            failedSecretAttempts=0;
+        },1000);
+    } else {
+        failedSecretAttempts++;
+        success.classList.add("hidden");
+        error.classList.remove("hidden");
+        box.classList.add("animate-shake");
+        setTimeout(()=>box.classList.remove("animate-shake"),500);
+        if(failedSecretAttempts>=3) location.reload();
     }
+}
 
-    // Initialize AOS and feather icons
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.tab-button').classList.add('border-gray-900', 'text-gray-900');
-        document.querySelector('.tab-button').classList.remove('border-transparent');
-        AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
-        feather.replace();
-    });
-
-    const SECRET_PASSWORD = "1234"; // ← غيّر كلمة المرور هنا
-    let failedAttempts = 0;
-
-    function openProtectedTab(tabName) {
-        const overlay = document.getElementById("password-overlay");
-        overlay.classList.remove("hidden");
-        overlay.dataset.tab = tabName;
-        document.getElementById("password-input").focus();
+// Member login
+function checkMemberLogin(){
+    const id = document.getElementById("member-id").value;
+    const pass = document.getElementById("member-pass").value;
+    const error = document.getElementById("login-error");
+    failedLoginAttempts++;
+    const member = membersData.find(m=>m.id===id && m.password===pass);
+    if(member){
+        document.getElementById("login-overlay").classList.add("hidden");
+        error.classList.add("hidden");
+        failedLoginAttempts=0;
+        showMemberList();
+    } else {
+        error.classList.remove("hidden");
+        document.getElementById("member-id").classList.add("animate-shake");
+        document.getElementById("member-pass").classList.add("animate-shake");
+        setTimeout(()=>{
+            document.getElementById("member-id").classList.remove("animate-shake");
+            document.getElementById("member-pass").classList.remove("animate-shake");
+        },500);
+        if(failedLoginAttempts>=3) location.reload();
     }
+}
 
-    function checkPassword() {
-        const input = document.getElementById("password-input").value;
-        const overlay = document.getElementById("password-overlay");
-        const error = document.getElementById("error-message");
-        const success = document.getElementById("success-message");
-        const box = document.getElementById("password-input");
-
-        if (input === SECRET_PASSWORD) {
-            box.classList.remove("border-red-600", "text-red-500");
-            box.classList.add("border-green-600", "text-green-500");
-            
-            error.classList.add("hidden");
-            success.classList.remove("hidden");
-
-            setTimeout(() => {
-                overlay.classList.add("hidden");
-                openTab(overlay.dataset.tab);
-                box.value = "";
-                success.classList.add("hidden");
-                box.classList.remove("border-green-600", "text-green-500");
-                box.classList.add("border-red-600", "text-red-500");
-                failedAttempts = 0;
-            }, 1000);
-        } else {
-            failedAttempts++;
-            success.classList.add("hidden");
-            error.classList.remove("hidden");
-            box.classList.add("animate-shake");
-            setTimeout(() => box.classList.remove("animate-shake"), 500);
-
-            if (failedAttempts >= 3) {
-                location.reload(); // refresh the page after 3 failed attempts
-            }
-        }
+// Show members list
+function showMemberList(){
+    const container = document.getElementById("member-list");
+    container.innerHTML="<h3 class='text-xl font-semibold mb-4'>مرحبا بالأعضاء</h3>";
+    
+    // Leader
+    const leader = membersData.filter(m=>m.role==="leader");
+    if(leader.length){
+        container.innerHTML+="<h4 class='text-lg font-bold mb-2'>المؤسس:</h4>";
+        leader.forEach(m=>{
+            container.innerHTML+=`<div class='leader'>👑 ${m.name}</div>`;
+        });
     }
+    // Majless
+    const majless = membersData.filter(m=>m.role==="majless");
+    if(majless.length){
+        container.innerHTML+="<h4 class='text-lg font-bold mt-4 mb-2'>أعضاء المجلس:</h4>";
+        majless.forEach(m=>{
+            container.innerHTML+=`<div class='majless'>${m.name}</div>`;
+        });
+    }
+    // Regular members
+    const members = membersData.filter(m=>m.role==="member");
+    if(members.length){
+        container.innerHTML+="<h4 class='text-lg font-bold mt-4 mb-2'>الأعضاء:</h4>";
+        members.forEach(m=>{
+            container.innerHTML+=`<div class='member'>${m.name}</div>`;
+        });
+    }
+}
 
-    // allow Enter key to submit
-    document.getElementById("password-input").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") checkPassword();
-    });
+// Initialize
+document.addEventListener('DOMContentLoaded',function(){
+    document.querySelector('.tab-button').classList.add('border-gray-900','text-gray-900');
+    document.querySelector('.tab-button').classList.remove('border-transparent');
+    AOS.init({duration:800,easing:'ease-in-out',once:true});
+    feather.replace();
+});
+
+// Enter key submit
+document.getElementById("password-input").addEventListener("keydown", function(e){ if(e.key==="Enter") checkPassword(); });
+document.getElementById("member-pass").addEventListener("keydown", function(e){ if(e.key==="Enter") checkMemberLogin(); });
 </script>
-
 </body>
 </html>
